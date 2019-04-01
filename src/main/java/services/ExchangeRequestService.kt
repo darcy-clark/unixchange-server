@@ -1,18 +1,20 @@
 package com.unixchange.server.services
 
-import com.unixchange.server.MockDB
 import com.unixchange.server.models.ExchangeRequest
+import com.unixchange.server.spring.ExchangeRequestRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
-class ExchangeRequestService {
+@Service
+class ExchangeRequestService @Autowired constructor(
+        val exchangeRequestRepository: ExchangeRequestRepository
+) {
 
-    companion object {
+    fun storeExchangeRequest(exchangeRequest: ExchangeRequest) {
+        exchangeRequestRepository.save(exchangeRequest)
+    }
 
-        fun storeExchangeRequest(exchangeRequest: ExchangeRequest) {
-            MockDB.storeExchangeRequest(exchangeRequest)
-        }
-
-        fun retrieveExchangeRequests(): List<ExchangeRequest> {
-            return MockDB.retrieveExchangeRequests()
-        }
+    fun retrieveExchangeRequests(): List<ExchangeRequest> {
+        return exchangeRequestRepository.findAll()
     }
 }

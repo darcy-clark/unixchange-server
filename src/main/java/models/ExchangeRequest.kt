@@ -11,6 +11,7 @@ class ExchangeRequest @JsonCreator constructor(
         val sellCurrency: CurrencyType,
         val type: ExchangeRequestType,
         val amount: Float,
+        val replies: List<ExchangeRequestReply>,
         val user: User,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
         val reqDate: Date
